@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {TouchableOpacity,StyleSheet, Text} from 'react-native';
 
-class Index extends Component {
+class ToggleButton extends Component {
 
     constructor(props) {
         super(props);
@@ -59,19 +59,15 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps(state) {
-    const { title } = state;
-    return {
-        title
-    };
-}
+const  mapStateToProps = state => ({
+  title: state.title
+})
 
-function mapDispatchToProps(dispatch) {
-    return {
-    };
-}
+const mapDispatchToProps = dispatch => ({
+
+})
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Index);
+)(ToggleButton);
