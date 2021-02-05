@@ -1,12 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import ToggleButton from "../ToggleButton";
-
+import ToggleButton from "../ToggleButton/index";
+import MenuCard from "../MenuCard/index"
 
 export default function SelectMenuView() {
 
     return (
-        <View style={styles.containerView}>
+
+        <View>
+            <MenuCard/>
             <Text>Welkom bij de kookclub!</Text>
             <ToggleButton btnTitle="Maandag"/>
             <ToggleButton btnTitle="Dinsdag"/>
@@ -20,8 +22,7 @@ export default function SelectMenuView() {
 
 const styles = StyleSheet.create({
     containerView: {
-        flex: 1,
-        backgroundColor: '#e0e7d6',
-        alignItems: 'center',
+        margin: 0,
+        padding: 0,
     },
 });

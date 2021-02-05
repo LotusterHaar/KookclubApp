@@ -1,14 +1,47 @@
-import React, {Component} from 'react';
-import {Appbar, Text} from 'react-native-paper';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Icon, withBadge} from 'react-native-elements'
+import {Header, Icon, withBadge, Text} from 'react-native-elements'
 
 
-@withBadge(5)
+const MessagesBadge = withBadge(5)(Icon)
+
 class MyDecoratedIcon extends React.Component {
+
+
     render() {
         return (
-            <Icon color="white" type="ionicon" name="notifications"/>
+            <MessagesBadge
+                type="ionicon"
+                name="notifications"
+                color="white"
+                size={30}
+            />
+
+        );
+    }
+}
+
+class MyTitleWithSubtitle extends React.Component {
+    render() {
+        return (
+            <View style={styles.appBarTitle}>
+                <Text h4 style={styles.white}>Kookclub</Text>
+                <Text style={styles.white}>Aanmelden</Text>
+            </View>
+        )
+
+    }
+}
+
+class RightComponentHeader extends React.Component {
+    render() {
+        return (
+            <View style={styles.icons}>
+                <MyDecoratedIcon/>
+                <Icon color="transparent" name="account-circle"/>
+                <Icon color="white" size={30} name="account-circle"/>
+                <Icon color="transparent" name="account-circle"/>
+            </View>
         );
     }
 }
@@ -24,18 +57,12 @@ export default function MenuAppBar() {
     }
 
     return (
-        <Appbar.Header>
-            <Appbar.Action icon="menu" onPress={_jumpToMenu}/>
-            <Appbar.Content style={styles.appBarTitle} title={<Text style={styles.appBarTitle}>Kookclub</Text>}
-                            subtitle={<Text style={styles.appBarTitle}>Inschrijven</Text>}/>
-            <View style={styles.icons}>
-                <MyDecoratedIcon/>
-            </View>
-            <Appbar.Action icon="account-circle" onPress={_account}/>
 
-
-        </Appbar.Header>
-
+        <Header leftComponent={<Icon color="white" name="menu" size={30}/>}
+                centerComponent={<MyTitleWithSubtitle/>}
+                rightComponent={<RightComponentHeader/>}
+                rightContainerStyle={{alignContent: "space-between"}}
+        />
     )
 }
 
@@ -43,14 +70,14 @@ export default function MenuAppBar() {
 const styles = StyleSheet.create({
     appBarTitle: {
         alignItems: 'center',
-        color: '#fffff',
+        color: 'white',
     },
     white: {
         color: 'white'
     },
     icons: {
-        marginRight: 30
-    }
-
-
+        flexDirection: 'row',
+        alignContent: 'space-between',
+        flexWrap: 'nowrap'
+    },
 })
