@@ -1,36 +1,24 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import {TouchableOpacity,StyleSheet, Text} from 'react-native';
+import React, {useState} from 'react';
+import {TouchableOpacity, StyleSheet, Text} from 'react-native';
 
-class ToggleButton extends Component {
+export default function ToggleButton(props) {
 
-    constructor(props) {
-        super(props);
+    const [btnToggled, setBtnToggled] = useState(false);
 
-        this.state = {
-            btnToggled: false,
-        }
-    }
-
-    onButtonToggle = () => {
-        this.setState({btnToggled: !this.state.btnToggled})
-        console.log('toggle');
-        console.log(this.state.btnToggled);
+    const onButtonToggle = () => {
+        setBtnToggled(!btnToggled)
     };
 
-    render() {
-        console.log(this.props.btnTitle)
-        return (
-            <TouchableOpacity onPress={this.onButtonToggle}
-                              style={[
-                styles.buttonContainer,
-                this.state.btnToggled && styles.btnToggled
-            ]}>
-                <Text style={styles.btnText}> {this.props.btnTitle} </Text>
+    return (
+        <TouchableOpacity onPress={onButtonToggle}
+                          style={[
+                              styles.buttonContainer,
+                              btnToggled && styles.btnToggled
+                          ]}>
+            <Text style={styles.btnText}> {props.btnTitle} </Text>
 
-            </TouchableOpacity>
-        );
-    }
+        </TouchableOpacity>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -45,7 +33,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 12,
         margin: 10,
-        backgroundColor:"#d272bd"
+        backgroundColor: "#d272bd"
     },
     btnToggled: {
         backgroundColor: "#b8b8b8",
@@ -58,16 +46,3 @@ const styles = StyleSheet.create({
         textTransform: "uppercase"
     }
 });
-
-const  mapStateToProps = state => ({
-  title: state.title
-})
-
-const mapDispatchToProps = dispatch => ({
-
-})
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ToggleButton);

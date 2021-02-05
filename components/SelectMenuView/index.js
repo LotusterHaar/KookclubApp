@@ -1,24 +1,22 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import ToggleButton from "../ToggleButton";
 
-class SelectMenuView extends Component {
 
+export default function SelectMenuView() {
 
-    render() {
-        return (
-            <View style={styles.containerView}>
-                <Text>Welkom bij de kookclub!</Text>
-                <ToggleButton btnTitle="Maandag" />
-                <ToggleButton btnTitle="Dinsdag" />
-                <ToggleButton btnTitle="Woensdag" />
-                <ToggleButton btnTitle="Donderdag"/>
-                <ToggleButton btnTitle="Vrijdag" />
-            </View>
-        );
-    }
+    return (
+        <View style={styles.containerView}>
+            <Text>Welkom bij de kookclub!</Text>
+            <ToggleButton btnTitle="Maandag"/>
+            <ToggleButton btnTitle="Dinsdag"/>
+            <ToggleButton btnTitle="Woensdag"/>
+            <ToggleButton btnTitle="Donderdag"/>
+            <ToggleButton btnTitle="Vrijdag"/>
+        </View>
+    );
 }
+
 
 const styles = StyleSheet.create({
     containerView: {
@@ -27,16 +25,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
-
-const  mapStateToProps = state => ({
-
-})
-
-const mapDispatchToProps = dispatch => ({
-
-})
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SelectMenuView);
