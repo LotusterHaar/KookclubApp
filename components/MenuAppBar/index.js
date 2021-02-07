@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Header, Icon, withBadge, Text} from 'react-native-elements'
-
+import {SafeAreaView} from 'react-native';
 
 const MessagesBadge = withBadge(5)(Icon)
 
@@ -57,13 +57,13 @@ export default function MenuAppBar() {
     }
 
     return (
-
-        <Header leftComponent={<Icon color="white" name="menu" size={30}/>}
-                centerComponent={<MyTitleWithSubtitle/>}
-                rightComponent={<RightComponentHeader/>}
-                rightContainerStyle={{alignContent: "space-between"}}
-        />
-    )
+        <SafeAreaView>
+            <Header leftComponent={<Icon color="white" name="menu" size={30}/>}
+                    centerComponent={<MyTitleWithSubtitle/>}
+                    rightComponent={<RightComponentHeader/>}
+                    rightContainerStyle={{alignContent: "space-between"}}/>
+        </SafeAreaView>
+)
 }
 
 
