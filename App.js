@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
-import {Container, Text} from 'native-base';
+import {Container, Text, Content} from 'native-base';
 import {StyleSheet} from "react-native";;
 import * as Font from "expo-font";
+import MenuCard from "./components/MenuCard";
 
 export default function App() {
     useEffect(() => {
@@ -12,9 +13,13 @@ export default function App() {
             });
         loadFont();
     }, []);
-    return (<Container>
-        <Text>Open up App.js to start working on your app!</Text>
-    </Container>)
+    return (<Content>
+        <MenuCard/>
+        <MenuCard/>
+        <MenuCard/>
+        <MenuCard/>
+        <MenuCard/>
+    </Content>)
 }
 
 const styles = StyleSheet.create({

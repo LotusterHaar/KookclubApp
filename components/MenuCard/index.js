@@ -1,24 +1,38 @@
 import React from 'react';
-import {Text} from 'react-native'
-import {Card, Button, Icon} from 'react-native-elements'
-import { SafeAreaView } from 'react-native';
-// implemented with Text and Button as children
-export default function MenuCard() {
-    return (
-        <SafeAreaView>
-            <Card>
-                <Card.Title>HELLO WORLD</Card.Title>
-                <Card.Divider/>
-                <Card.Image source={{uri: 'https://picsum.photos/700'}}>
-                    <Text style={{marginBottom: 10}}>
-                        The idea with React Native Elements is more about component structure than actual design.
-                    </Text>
-                    <Button
-                        icon={<Icon name='code' color='#ffffff'/>}
-                        // buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                        title='VIEW NOW'/>
-                </Card.Image>
-            </Card>
-        </SafeAreaView>
-    )
+import { Image } from 'react-native';
+import {Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+export default function MenuCard () {
+        return (
+                    <Card>
+                        <CardItem>
+                            <Left>
+                                <Thumbnail source={{uri: 'https://www.zorgalsthuis.nl/images/logo.jpg'}} />
+                                <Body>
+                                    <Text>Biefstuk met aardappeltjes</Text>
+                                    <Text note>Met worteltjes en champignongroomsaus</Text>
+                                </Body>
+                            </Left>
+                        </CardItem>
+                        <CardItem cardBody>
+                            <Image source={{uri: 'https://i.insider.com/5d0bc2a0e3ecba03841d82d2?width=960&format=jpeg'}} style={{height: 100, width: null, flex: 1}}/>
+                        </CardItem>
+                        <CardItem>
+                            <Left>
+                                <Button transparent>
+                                    <Icon active name="thumbs-up" />
+                                    <Text>12 Likes</Text>
+                                </Button>
+                            </Left>
+                            <Body>
+                                <Button transparent>
+                                    <Icon active name="chatbubbles" />
+                                    <Text>4 Comments</Text>
+                                </Button>
+                            </Body>
+                            <Right>
+                                <Text>11h ago</Text>
+                            </Right>
+                        </CardItem>
+                    </Card>
+        );
 }
