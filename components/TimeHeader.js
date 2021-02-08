@@ -17,11 +17,11 @@ export default function TimeHeader() {
                 <Col size={5} style={styles.centerItem}>
                     <Icon type="AntDesign" name='clockcircle'/>
                 </Col>
-                <Col size={30}>
-                    <Body  style={styles.selectAll}>
-                        <Text style={{fontSize: 12}}>Selecteer alles</Text>
+                <Col size={45} style={styles.columnSelectAll}>
+                    <View  style={styles.columnSelectAll}>
+                        <Text style={{fontSize: 14, textAlign:'center', alignSelf:'center'}}>selecteer alles</Text>
                         <CheckBox checked={true} color="green" style={{alignSelf:'center'}}/>
-                    </Body>
+                    </View>
                 </Col>
             </Grid>
         </Header>
@@ -39,9 +39,11 @@ const styles = StyleSheet.create({
             flexWrap: 'wrap',
             justifyContent: 'center',
         },
-        selectAll:{
+        columnSelectAll:{
+            display: 'flex',
             flexDirection: 'column',
-            alignItems:'center'
+            alignItems:'center',
+            justifyContent: 'center',
         }
     }
 )
