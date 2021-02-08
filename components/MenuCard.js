@@ -1,14 +1,18 @@
-import React from 'react';
-import {Image, StyleSheet, View, Switch} from 'react-native';
+import React, {useState} from 'react';
+import  {Image, StyleSheet, View, Switch} from 'react-native';
 import {Content, Card, CardItem, Text, Button, Icon, Left, Body, Right} from 'native-base';
 
 export default function MenuCard(props) {
+
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
     return (
         <Content>
             <Card style={styles.marginSides}>
                 <CardItem style={styles.zeroPadding}>
-                    <View style={[styles.dateText, props.yesOrNo ? styles.yesColor : styles.noColor]}>
-                        <Text style={[styles.textColor, styles.header]}>Maandag</Text>
+                    <View style={[styles.dateText,isEnabled ? styles.yesColor : styles.noColor]}>
+                        <Text style={[styles.textColor, styles.header]}>{props.day}</Text>
                         <Text style={styles.textColor}>04</Text>
                         <Text style={styles.textColor} note>feb</Text>
                     </View>
@@ -17,7 +21,14 @@ export default function MenuCard(props) {
                             <Body>
                                 <CardItem header bordered style={styles.zeroPadding}>
                                     <Text style={styles.cardHeader}>Biefstuk met aardappeltjes</Text>
-                                    <Switch value={false}/>
+                                    <Switch
+                                        trackColor={{ false: "#767577", true: "#5cb85c" }}
+                                        thumbColor={isEnabled ? "green" : "#f4f3f4"}
+                                        ios_backgroundColor="#3e3e3e"
+                                        onValueChange={toggleSwitch}
+                                        value={isEnabled}
+                                        name={props.day}
+                                    />
                                 </CardItem>
                                 <CardItem style={styles.zeroPadding}>
                                     <Text note>Met boontjes, worteltjes en champignonroomsaus
@@ -53,11 +64,13 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'center',
+        alignContent: 'center',
         marginTop: 0,
         marginBottom: 0,
         height: '100%',
         borderBottomLeftRadius: 2,
         borderTopLeftRadius: 2,
+        width: '29%'
 
     },
     flexEnd: {

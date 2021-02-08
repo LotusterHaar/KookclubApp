@@ -31,15 +31,12 @@ export default function App() {
         return (<Container style={styles.mainBackground}>
             <AppBar/>
             <TimeHeader />
-
-
             <Content>
-                <MenuCard yesOrNo = {false}/>
-                <MenuCard yesOrNo = {true}/>
-                <MenuCard yesOrNo = {true}/>
-                <MenuCard yesOrNo = {false}/>
-                <MenuCard yesOrNo = {true}/>
-
+                <MenuCard yesOrNo = {false} day="Maandag"/>
+                <MenuCard yesOrNo = {true} day="Dinsdag"/>
+                <MenuCard yesOrNo = {true} day= "Woensdag" />
+                <MenuCard yesOrNo = {false} day = "Donderdag" />
+                <MenuCard yesOrNo = {true} day= "Vrijdag" />
             </Content>
         </Container>)
     }

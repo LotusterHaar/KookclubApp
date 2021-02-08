@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Image, StyleSheet, View, Switch} from 'react-native';
 import { Badge, Text, Header, Left, Body, Right, Button, Icon, Title, Subtitle } from 'native-base';
 
 
 export default function AppBar() {
-        return (
+
+
+    return (
                 <Header style ={styles.headerBackground} >
                     <Left>
                         <Button transparent>
