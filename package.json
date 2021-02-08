@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo/webpack-config": "^0.12.58",
     "expo": "~40.0.0",
     "expo-app-loading": "^1.0.1",
     "expo-font": "~8.4.0",

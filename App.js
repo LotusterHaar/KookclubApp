@@ -4,6 +4,7 @@ import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import {Ionicons} from '@expo/vector-icons';
 import MenuCard from "./components/MenuCard";
+import {StyleSheet} from "react-native";
 
 export default function App() {
 
@@ -25,7 +26,7 @@ export default function App() {
             <AppLoading/>
         )
     } else {
-        return (<Content>
+        return (<Content style={styles.mainBackground}>
             <MenuCard/>
             <MenuCard/>
             <MenuCard/>
@@ -34,3 +35,10 @@ export default function App() {
         </Content>)
     }
 }
+
+const styles = StyleSheet.create({
+        mainBackground: {
+            backgroundColor: '#F5E7F0'
+        }
+    }
+)
