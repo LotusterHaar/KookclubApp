@@ -2,33 +2,32 @@ import React from 'react';
 import {Image, StyleSheet, View, Switch} from 'react-native';
 import {Content, Card, CardItem, Text, Button, Icon, Left, Body, Right} from 'native-base';
 
-export default function MenuCard() {
+export default function MenuCard(props) {
     return (
         <Content>
             <Card style={styles.marginSides}>
                 <CardItem style={styles.zeroPadding}>
-                    <View style={styles.dateText}>
+                    <View style={[styles.dateText, props.yesOrNo ? styles.yesColor : styles.noColor]}>
                         <Text style={[styles.textColor, styles.header]}>Maandag</Text>
                         <Text style={styles.textColor}>04</Text>
                         <Text style={styles.textColor} note>feb</Text>
                     </View>
                     <Body>
-                    <CardItem body>
-                        <Body>
-                            <CardItem header bordered style={styles.zeroPadding}>
-                                <Text style={styles.cardHeader}>Biefstuk met aardappeltjes</Text>
-                                <Switch value={false}/>
-                            </CardItem>
-                            <CardItem style={styles.zeroPadding}>
-                                <Text note>Met boontjes, worteltjes en champignonroomsaus
-                                </Text>
-                                <Text style={[styles.textColorBlack]}>Ja
-                                </Text>
-
-                            </CardItem>
-                        </Body>
-                    </CardItem>
-                        </Body>
+                        <CardItem body>
+                            <Body>
+                                <CardItem header bordered style={styles.zeroPadding}>
+                                    <Text style={styles.cardHeader}>Biefstuk met aardappeltjes</Text>
+                                    <Switch value={false}/>
+                                </CardItem>
+                                <CardItem style={styles.zeroPadding}>
+                                    <Text note>Met boontjes, worteltjes en champignonroomsaus
+                                    </Text>
+                                    <Text style={[styles.textColorBlack]}>Ja
+                                    </Text>
+                                </CardItem>
+                            </Body>
+                        </CardItem>
+                    </Body>
                 </CardItem>
 
             </Card>
@@ -37,6 +36,12 @@ export default function MenuCard() {
 }
 
 const styles = StyleSheet.create({
+    yesColor:{
+        backgroundColor: 'green'
+    },
+    noColor: {
+        backgroundColor: '#b11414'
+    },
     cardHeader: {
         color: "black",
         fontWeight: 'bold',
@@ -48,7 +53,6 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'green',
         marginTop: 0,
         marginBottom: 0,
         height: '100%',
@@ -91,8 +95,6 @@ const styles = StyleSheet.create({
         marginTop: 0,
         marginBottom: 0,
         width: '100%',
-
-
     },
 
 })

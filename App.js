@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Content} from 'native-base';
+import {Content, Container, Text} from 'native-base';
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import {Ionicons} from '@expo/vector-icons';
 import MenuCard from "./components/MenuCard";
+import AppBar from "./components/AppBar"
 import {StyleSheet} from "react-native";
 
 export default function App() {
@@ -26,19 +27,24 @@ export default function App() {
             <AppLoading/>
         )
     } else {
-        return (<Content style={styles.mainBackground}>
-            <MenuCard/>
-            <MenuCard/>
-            <MenuCard/>
-            <MenuCard/>
-            <MenuCard/>
-        </Content>)
+        return (<Container style={styles.mainBackground}>
+            <AppBar/>
+
+
+            <Content>
+                <MenuCard yesOrNo = {false}/>
+                <MenuCard yesOrNo = {true}/>
+                <MenuCard yesOrNo = {true}/>
+                <MenuCard yesOrNo = {false}/>
+                <MenuCard yesOrNo = {true}/>
+            </Content>
+        </Container>)
     }
 }
 
 const styles = StyleSheet.create({
         mainBackground: {
-            backgroundColor: '#F5E7F0'
+            backgroundColor: '#f3ecf0'
         }
     }
 )
