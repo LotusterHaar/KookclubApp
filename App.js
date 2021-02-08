@@ -5,6 +5,7 @@ import * as Font from "expo-font";
 import {Ionicons} from '@expo/vector-icons';
 import MenuCard from "./components/MenuCard";
 import AppBar from "./components/AppBar"
+import TimeHeader from "./components/TimeHeader";
 import {StyleSheet} from "react-native";
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
     } else {
         return (<Container style={styles.mainBackground}>
             <AppBar/>
+            <TimeHeader />
 
 
             <Content>
@@ -37,6 +39,7 @@ export default function App() {
                 <MenuCard yesOrNo = {true}/>
                 <MenuCard yesOrNo = {false}/>
                 <MenuCard yesOrNo = {true}/>
+
             </Content>
         </Container>)
     }
