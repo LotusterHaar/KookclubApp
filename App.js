@@ -24,11 +24,6 @@ export default function App() {
         })();
     }, [])
 
-    useEffect(() => {
-        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
-        LogBox.ignoreLogs(['Animated.event: `Animated.event now requires a second argument for options`']);
-    }, [])
-
     if (!isReady) {
         return (
             <AppLoading/>
@@ -39,11 +34,11 @@ export default function App() {
                 <AppBar/>
                 <TimeHeader/>
                 <Content>
-                    <MenuCard day="Maandag"/>
-                    <MenuCard day="Dinsdag"/>
-                    <MenuCard day="Woensdag"/>
-                    <MenuCard day="Donderdag"/>
-                    <MenuCard day="Vrijdag"/>
+                    <MenuCard day="Maandag" selectAll={true}/>
+                    <MenuCard day="Dinsdag" selectAll={true}/>
+                    <MenuCard day="Woensdag" selectAll={true}/>
+                    <MenuCard day="Donderdag" selectAll={true}/>
+                    <MenuCard day="Vrijdag" selectAll={true}/>
                 </Content>
             </Container>)
     }
@@ -51,7 +46,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
         mainBackground: {
-            backgroundColor: '#f3ecf0'
+            //backgroundColor: '#e9e1f8',
+            backgroundColor:'#c6d4c6'
         }
     }
 )

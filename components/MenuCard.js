@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, View, Switch, LogBox} from 'react-native';
 import {Content, Card, CardItem, Text, Button, Icon, Left, Body, Right} from 'native-base';
-import TriStateToggleSwitch from 'rn-tri-toggle-switch'
+import TriStateToggleSwitch from "./TriStateToggleSwitch/TriStateToggleSwitch";
+
 
 export default function MenuCard(props) {
 
@@ -17,15 +18,12 @@ export default function MenuCard(props) {
 
     ]
 
-    const [ choices, setChoices] = useState(choicesProp);
-    const [ choice, setChoice] = useState();
-
-
+    const [choice, setChoice] = useState();
 
 
     const determineStateStyle = (value) => {
         let style;
-        switch(value){
+        switch (value) {
 
             case false:
                 style = styles.noColor;
@@ -44,7 +42,16 @@ export default function MenuCard(props) {
         return style;
     }
 
-    const toggleSwitch = () =>{ (setChoice(!choice));};
+    const toggleSwitch = () => {
+        setChoice(!choice);
+    };
+
+    const determineChoiceValue = (value) => {
+        if(props.selectAll!== null)
+            return setChoice(props.selectAll);
+        else return setChoice(value)
+    };
+
 
     return (
         <Content>
@@ -67,15 +74,14 @@ export default function MenuCard(props) {
 
                                     <TriStateToggleSwitch
                                         name={props.day}
-                                        width = {200}
-                                        selectedNoneBgColor={'#5b5258'}
+                                        width={200}
+                                        selectedNoneBgColor={'#483d8b'}
                                         selectedRightBgColor="green"
                                         selectedLeftBgColor={'#b11414'}
                                         fontColor={'#fff'}
                                         fontSize={13}
                                         circleBgColor={'white'}
                                         choices={choicesProp}
-                                        value={choice}
                                         onChange={toggleSwitch}/>
                                 </CardItem>
                             </Body>
@@ -95,8 +101,8 @@ const styles = StyleSheet.create({
     noColor: {
         backgroundColor: '#b11414'
     },
-    openColor:{
-        backgroundColor:  '#5b5258'
+    openColor: {
+        backgroundColor: '#483d8b'
     },
     cardHeader: {
         color: "black",
@@ -165,15 +171,13 @@ const styles = StyleSheet.create({
         marginBottom: 0,
         width: '100%',
     },
-    switchContainer:{
+    switchContainer: {
         flexDirection: 'column',
         paddingLeft: 0,
         paddingRight: 5,
         paddingBottom: 0,
-        justifyContent: 'space-between',
         marginTop: 0,
         marginBottom: 0,
-        width: '100%',
     },
 
 })
