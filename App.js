@@ -6,7 +6,8 @@ import {Ionicons} from '@expo/vector-icons';
 import MenuCard from "./components/MenuCard";
 import AppBar from "./components/AppBar"
 import TimeHeader from "./components/TimeHeader";
-import {StyleSheet} from "react-native";
+import {StyleSheet, LogBox} from "react-native";
+
 
 export default function App() {
 
@@ -23,22 +24,28 @@ export default function App() {
         })();
     }, [])
 
+    useEffect(() => {
+        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+        LogBox.ignoreLogs(['Animated.event: `Animated.event now requires a second argument for options`']);
+    }, [])
+
     if (!isReady) {
         return (
             <AppLoading/>
         )
     } else {
-        return (<Container style={styles.mainBackground}>
-            <AppBar/>
-            <TimeHeader />
-            <Content>
-                <MenuCard yesOrNo = {false} day="Maandag"/>
-                <MenuCard yesOrNo = {true} day="Dinsdag"/>
-                <MenuCard yesOrNo = {true} day= "Woensdag" />
-                <MenuCard yesOrNo = {false} day = "Donderdag" />
-                <MenuCard yesOrNo = {true} day= "Vrijdag" />
-            </Content>
-        </Container>)
+        return (
+            <Container style={styles.mainBackground}>
+                <AppBar/>
+                <TimeHeader/>
+                <Content>
+                    <MenuCard day="Maandag"/>
+                    <MenuCard day="Dinsdag"/>
+                    <MenuCard day="Woensdag"/>
+                    <MenuCard day="Donderdag"/>
+                    <MenuCard day="Vrijdag"/>
+                </Content>
+            </Container>)
     }
 }
 

@@ -1,17 +1,56 @@
-import React, {useState} from 'react';
-import  {Image, StyleSheet, View, Switch} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, StyleSheet, View, Switch, LogBox} from 'react-native';
 import {Content, Card, CardItem, Text, Button, Icon, Left, Body, Right} from 'native-base';
+import TriStateToggleSwitch from 'rn-tri-toggle-switch'
 
 export default function MenuCard(props) {
 
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    let choicesProp = [
+        {
+            choiceCode: 'No',
+            choiceText: 'Ik eet niet mee'
+        },
+        {
+            choiceCode: 'Yes',
+            choiceText: 'Ik eet mee'
+        },
+
+    ]
+
+    const [ choices, setChoices] = useState(choicesProp);
+    const [ choice, setChoice] = useState();
+
+
+
+
+    const determineStateStyle = (value) => {
+        let style;
+        switch(value){
+
+            case false:
+                style = styles.noColor;
+                break
+            case true:
+                style = styles.yesColor;
+                break;
+            case 'Open':
+                style = styles.openColor;
+                break;
+            default:
+                style = styles.openColor;
+                break;
+
+        }
+        return style;
+    }
+
+    const toggleSwitch = () =>{ (setChoice(!choice));};
 
     return (
         <Content>
             <Card style={styles.marginSides}>
                 <CardItem style={styles.zeroPadding}>
-                    <View style={[styles.dateText,isEnabled ? styles.yesColor : styles.noColor]}>
+                    <View style={[styles.dateText, determineStateStyle(choice)]}>
                         <Text style={[styles.textColor, styles.header]}>{props.day}</Text>
                         <Text style={styles.textColor}>04</Text>
                         <Text style={styles.textColor} note>feb</Text>
@@ -19,22 +58,25 @@ export default function MenuCard(props) {
                     <Body>
                         <CardItem body>
                             <Body>
-                                <CardItem header bordered style={styles.zeroPadding}>
-                                    <Text style={styles.cardHeader}>Biefstuk met aardappeltjes</Text>
-                                    <Switch
-                                        trackColor={{ false: "#767577", true: "#5cb85c" }}
-                                        thumbColor={isEnabled ? "green" : "#f4f3f4"}
-                                        ios_backgroundColor="#3e3e3e"
-                                        onValueChange={toggleSwitch}
-                                        value={isEnabled}
-                                        name={props.day}
-                                    />
-                                </CardItem>
-                                <CardItem style={styles.zeroPadding}>
+                                <CardItem bordered style={styles.textContainer}>
+                                    <Text header style={styles.header}>Biefstuk met aardappeltjes</Text>
                                     <Text note>Met boontjes, worteltjes en champignonroomsaus
                                     </Text>
-                                    <Text style={[styles.textColorBlack]}>Ja
-                                    </Text>
+                                </CardItem>
+                                <CardItem style={styles.switchContainer}>
+
+                                    <TriStateToggleSwitch
+                                        name={props.day}
+                                        width = {200}
+                                        selectedNoneBgColor={'#5b5258'}
+                                        selectedRightBgColor="green"
+                                        selectedLeftBgColor={'#b11414'}
+                                        fontColor={'#fff'}
+                                        fontSize={13}
+                                        circleBgColor={'white'}
+                                        choices={choicesProp}
+                                        value={choice}
+                                        onChange={toggleSwitch}/>
                                 </CardItem>
                             </Body>
                         </CardItem>
@@ -47,11 +89,14 @@ export default function MenuCard(props) {
 }
 
 const styles = StyleSheet.create({
-    yesColor:{
+    yesColor: {
         backgroundColor: 'green'
     },
     noColor: {
         backgroundColor: '#b11414'
+    },
+    openColor:{
+        backgroundColor:  '#5b5258'
     },
     cardHeader: {
         color: "black",
@@ -88,6 +133,7 @@ const styles = StyleSheet.create({
     },
     header: {
         fontWeight: 'bold',
+        fontSize: 15,
         textDecorationLine: 'underline',
         flexWrap: 'wrap'
     },
@@ -103,6 +149,26 @@ const styles = StyleSheet.create({
         paddingLeft: 0,
         paddingRight: 5,
         paddingTop: 0,
+        paddingBottom: 0,
+        justifyContent: 'space-between',
+        marginTop: 0,
+        marginBottom: 0,
+        width: '100%',
+    },
+    textContainer: {
+        flexDirection: 'column',
+        paddingLeft: 0,
+        paddingRight: 5,
+        paddingTop: 0,
+        justifyContent: 'space-between',
+        marginTop: 0,
+        marginBottom: 0,
+        width: '100%',
+    },
+    switchContainer:{
+        flexDirection: 'column',
+        paddingLeft: 0,
+        paddingRight: 5,
         paddingBottom: 0,
         justifyContent: 'space-between',
         marginTop: 0,
