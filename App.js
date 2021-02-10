@@ -7,6 +7,7 @@ import MenuCard from "./components/MenuCard";
 import AppBar from "./components/AppBar"
 import TimeHeader from "./components/TimeHeader";
 import {StyleSheet} from "react-native";
+import MultiSwitch from "./components/MultiSwitch/MultiSwitch";
 
 export default function App() {
 
@@ -32,6 +33,19 @@ export default function App() {
             <AppBar/>
             <TimeHeader />
             <Content>
+                <MultiSwitch
+                    currentStatus={'Open'}
+                    disableSwitch={false}
+                    disableScroll={value => {
+                        // console.log('scrollEnabled', value);
+                        // this.scrollView.setNativeProps({
+                        //     scrollEnabled: value
+                        // });
+                    }}
+                    isParentScrollEnabled={false}
+                    onStatusChanged={text => {
+                        console.log('Change Status ', text);
+                    }}/>
                 <MenuCard yesOrNo = {false} day="Maandag"/>
                 <MenuCard yesOrNo = {true} day="Dinsdag"/>
                 <MenuCard yesOrNo = {true} day= "Woensdag" />
