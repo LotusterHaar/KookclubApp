@@ -19,37 +19,35 @@ export default function MenuCard(props) {
     ]
 
     const [choice, setChoice] = useState();
+    const [choiceStyle, setChoiceStyle] = useState();
 
 
-    const determineStateStyle = (value) => {
-        let style;
-        switch (value) {
-
-            case false:
-                style = styles.noColor;
-                break
-            case true:
-                style = styles.yesColor;
-                break;
-            case 'Open':
-                style = styles.openColor;
-                break;
-            default:
-                style = styles.openColor;
-                break;
-
-        }
-        return style;
+    const determineStateStyleByProps = () => {
+        console.log(props.selectAll)
+        if (typeof props.selectAll === 'boolean')
+            setChoiceStyle(props.selectAll ? styles.yesColor : styles.noColor)
+        else
+            setChoiceStyle(styles.openColor)
     }
 
-    const toggleSwitch = () => {
-        setChoice(!choice);
-    };
+    const determineStateStyle = (value) => {
+        console.log(props.selectAll)
+        console.log('value:', value, props.selectAll)
+        if (typeof props.selectAll !== 'boolean') // must be changed to someting like value === ' SELECTED_NONE'
+            setChoiceStyle(styles.openColor)
+        else if (typeof value == 'boolean')
+            setChoiceStyle(value ?  styles.noColor : styles.yesColor)
+        else
+            setChoiceStyle(styles.openColor)
+    }
 
-    const determineChoiceValue = (value) => {
-        if(props.selectAll!== null)
-            return setChoice(props.selectAll);
-        else return setChoice(value)
+    useEffect(() => {
+        determineStateStyleByProps(props.selectAll)
+    }, [])
+
+    const toggleSwitch = () => {
+        determineStateStyle(!choice)
+        setChoice(!choice);
     };
 
 
@@ -57,7 +55,7 @@ export default function MenuCard(props) {
         <Content>
             <Card style={styles.marginSides}>
                 <CardItem style={styles.zeroPadding}>
-                    <View style={[styles.dateText, determineStateStyle(choice)]}>
+                    <View style={[styles.dateText, choiceStyle]}>
                         <Text style={[styles.textColor, styles.header]}>{props.day}</Text>
                         <Text style={styles.textColor}>04</Text>
                         <Text style={styles.textColor} note>feb</Text>
@@ -81,6 +79,7 @@ export default function MenuCard(props) {
                                         fontColor={'#fff'}
                                         fontSize={13}
                                         circleBgColor={'white'}
+                                        initialValue={props.selectAll ? "Yes" : "No"}
                                         choices={choicesProp}
                                         onChange={toggleSwitch}/>
                                 </CardItem>
