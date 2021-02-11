@@ -1,9 +1,19 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {Image, StyleSheet, View, Switch} from 'react-native';
 import {Container, Badge, Text, Header, Body, Right, CheckBox, Button, Icon, Title, Subtitle} from 'native-base';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 
-export default function TimeHeader() {
+
+
+export default function TimeHeader(props) {
+    const [isSelected, setSelection] = useState(true);
+
+    const onCheckBoxPress = () =>{
+        setSelection(!isSelected)
+        props.onCheckBoxPressCallBack(!isSelected)
+    }
+
+
     return (
         <Header style={styles.headerBackground}>
             <Grid>
@@ -20,12 +30,17 @@ export default function TimeHeader() {
                 <Col size={40} style={styles.columnSelectAll}>
                     <View style={styles.columnSelectAll}>
                         <Text style={styles.checkboxText}>selecteer alles</Text>
-                        <CheckBox checked={true} color="green" style={{alignSelf: 'center'}}/>
+                        <CheckBox
+                            checked={isSelected}
+                            onPress={onCheckBoxPress}
+                            color="green"
+                            style={{alignSelf: 'center'}}
+                        />
                     </View>
                 </Col>
             </Grid>
         </Header>
-    );
+    )
 }
 
 const styles = StyleSheet.create({

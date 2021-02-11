@@ -20,14 +20,26 @@ export default function MenuCard(props) {
 
     const [choice, setChoice] = useState();
     const [choiceStyle, setChoiceStyle] = useState();
+    const [initialValue, setInitialValue] = useState();
 
 
     const determineStateStyleByProps = () => {
-        console.log(props.selectAll)
-        if (typeof props.selectAll === 'boolean')
-            setChoiceStyle(props.selectAll ? styles.yesColor : styles.noColor)
-        else
+        if (props.selectAll === undefined) {
+            setInitialValue(null)
             setChoiceStyle(styles.openColor)
+        }
+        else if (props.selectAll){
+            setInitialValue("Yes")
+            setChoiceStyle(styles.yesColor)
+        }
+
+        else{
+            setInitialValue("No")
+            setChoiceStyle(styles.noColor)
+        }
+
+
+
     }
 
     const determineStateStyle = (value) => {
@@ -35,19 +47,24 @@ export default function MenuCard(props) {
         console.log('value:', value, props.selectAll)
         if (typeof props.selectAll !== 'boolean') // must be changed to someting like value === ' SELECTED_NONE'
             setChoiceStyle(styles.openColor)
-        else if (typeof value == 'boolean')
-            setChoiceStyle(value ?  styles.noColor : styles.yesColor)
-        else
+        if (value === null || value === undefined)
             setChoiceStyle(styles.openColor)
+        else if (value.choiceCode == 'Yes')
+            setChoiceStyle(styles.yesColor)
+        else if (value.choiceCode == 'No')
+            setChoiceStyle(styles.noColor)
     }
+
 
     useEffect(() => {
         determineStateStyleByProps(props.selectAll)
-    }, [])
+        determineStateStyle(choice)
+        toggleSwitch(props.selectAll)
+    }, [props.selectAll])
 
-    const toggleSwitch = () => {
-        determineStateStyle(!choice)
-        setChoice(!choice);
+    const toggleSwitch = (value) => {
+        determineStateStyle(value)
+        setChoice(value)
     };
 
 
@@ -79,9 +96,9 @@ export default function MenuCard(props) {
                                         fontColor={'#fff'}
                                         fontSize={13}
                                         circleBgColor={'white'}
-                                        initialValue={props.selectAll ? "Yes" : "No"}
+                                        initialValue={initialValue}
                                         choices={choicesProp}
-                                        onChange={toggleSwitch}/>
+                                        onChange={(value) => toggleSwitch(value)}/>
                                 </CardItem>
                             </Body>
                         </CardItem>
