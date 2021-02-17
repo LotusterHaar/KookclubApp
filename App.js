@@ -7,6 +7,7 @@ import MenuCard from "./components/MenuCard";
 import AppBar from "./components/AppBar"
 import TimeHeader from "./components/TimeHeader";
 import {StyleSheet, LogBox} from "react-native";
+import moment from "moment";
 
 
 export default function App() {
@@ -27,6 +28,10 @@ export default function App() {
 
     useEffect(() => {
     }, [checkedAll])
+
+
+
+
 
     const onCheckBoxPress = (checked) =>{
         setCheckedAll(checked)
