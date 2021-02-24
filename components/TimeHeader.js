@@ -18,12 +18,15 @@ export default function TimeHeader(props) {
     const [countdownDate, setCountdownDate] = useState(addExtraMinutes().getTime());
 
 
+    const [distanceToDate, setDistanceToDate] = useState(countdownDate - new Date().getTime());
+
     const [state, setState] = useState({
         days: 0,
         hours: 0,
         minutes: 0,
         seconds: 0,
     });
+
 
     useEffect(() => {
         console.log(countdownDate)
@@ -35,6 +38,8 @@ export default function TimeHeader(props) {
             const currentTime = new Date().getTime();
 
             const distanceToDate = countdownDate - currentTime;
+            setDistanceToDate(distanceToDate)
+            console.log('distance', distanceToDate)
 
             let days = Math.floor(distanceToDate / (1000 * 60 * 60 * 24));
             let hours = Math.floor(
@@ -60,6 +65,16 @@ export default function TimeHeader(props) {
         }
     };
 
+    const getTimeMinutes = (elapsedTime) => Math.floor(
+        (elapsedTime  * 5/3* 0.00001),)
+
+    const renderTime = (time) => {
+        return (
+            <Animated.Text style={{color: '#004777'}}>
+                {time} min
+            </Animated.Text>
+        );
+    };
 
     const onCheckBoxPress = () => {
         setSelection(!isSelected)
@@ -81,9 +96,8 @@ export default function TimeHeader(props) {
                     <CountdownCircleTimer
                         isPlaying
                         size={50}
+                        duration={distanceToDate}
                         strokeWidth={4}
-                        initialRemainingTime={40}
-                        duration={4000}
                         onFinish={() => console.log('finished ')}
                         colors={[
                             ['#004777', 0.4],
@@ -91,24 +105,22 @@ export default function TimeHeader(props) {
                             ['#A30000', 0.2],
                         ]}
                     >
-                        {({remainingTime, animatedColor}) => (
-                            <Animated.Text style={{color: animatedColor}}>
-                                {remainingTime}
-                            </Animated.Text>
-                        )}
+                        {({ elapsedTime }) =>
+                            renderTime( getTimeMinutes( distanceToDate - elapsedTime))
+                        }
                     </CountdownCircleTimer>
 
                 </Col>
-                <Col size={40} >
-                    <Row >
+                <Col size={40}>
+                    <Row>
                         <Subtitle style={styles.checkboxText}>selecteer alles</Subtitle>
                         <View style={styles.centerItem}>
-                        <CheckBox
-                            checked={isSelected}
-                            onPress={onCheckBoxPress}
-                            color="green"
-                            styles={styles.checkbox}
-                        />
+                            <CheckBox
+                                checked={isSelected}
+                                onPress={onCheckBoxPress}
+                                color="green"
+                                styles={styles.checkbox}
+                            />
                         </View>
                     </Row>
                 </Col>
